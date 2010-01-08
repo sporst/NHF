@@ -32,7 +32,7 @@ public class TraceLogParser
 		{
 			final TaintGraph graph = new TaintGraph();
 
-			final IFilledList<TraceLogLine> lines = parse(new File("F:\\fce\\trace.txt"));
+			final IFilledList<TraceLogLine> lines = parse(new File("F:\\fce\\Faxanadu (U).log"));
 
 			for (final TraceLogLine traceLogLine : lines)
 			{
@@ -139,8 +139,9 @@ public class TraceLogParser
 		final String valueA = currentLine.substring(45, 47);
 		final String valueX = currentLine.substring(50, 52);
 		final String valueY = currentLine.substring(55, 57);
-		final String valueFlags = currentLine.substring(60, 68);
+		final String valueS = currentLine.substring(60, 62);
+		final String valueFlags = currentLine.substring(65, 73);
 
-		return new TraceLogLine(address, data, instruction, memoryAddress, memoryValue, valueA, valueX, valueY, valueFlags);
+		return new TraceLogLine(address, data, instruction, memoryAddress, memoryValue, valueA, valueX, valueY, valueS, valueFlags);
 	}
 }

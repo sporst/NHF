@@ -10,9 +10,10 @@ public class TraceLogLine
 	private final String m_valueA;
 	private final String m_valueX;
 	private final String m_valueY;
+	private final String m_valueS;
 	private final String m_valueFlags;
 
-	public TraceLogLine(final String address, final String data, final String instruction, final String memoryAddress, final String memoryValue, final String valueA, final String valueX, final String valueY, final String valueFlags)
+	public TraceLogLine(final String address, final String data, final String instruction, final String memoryAddress, final String memoryValue, final String valueA, final String valueX, final String valueY, String valueS, final String valueFlags)
 	{
 		if (address == null)
 		{
@@ -61,6 +62,7 @@ public class TraceLogLine
 		m_valueA = valueA;
 		m_valueX = valueX;
 		m_valueY = valueY;
+		m_valueS = valueS;
 		m_valueFlags = valueFlags;
 	}
 
@@ -107,5 +109,10 @@ public class TraceLogLine
 	public String getValueY()
 	{
 		return m_valueY;
+	}
+	
+	public String getValueS()
+	{
+		return m_valueS;
 	}
 }
