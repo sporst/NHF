@@ -28,7 +28,7 @@ public class RorTranslator
 		}
 		else
 		{
-			final TranslationResult operandResult = OperandTranslator.translate(environment, offset, instruction.getOperand(), true);
+			final TranslationResult operandResult = OperandTranslator.translate(environment, offset, instruction.getOperand(), true, instruction);
 			instructions.addAll(operandResult.getInstructions());
 
 			offset = baseOffset + instructions.size();
@@ -41,18 +41,18 @@ public class RorTranslator
 		final String shiftedC = environment.getNextVariableString();
 		final String combinedResult = instruction.getOperand() == null ? "A" : environment.getNextVariableString();
 
-		instructions.add(ReilHelpers.createBsh(offset++, OperandSize.BYTE, source, OperandSize.BYTE, "-1", OperandSize.BYTE, shiftResult));
-		instructions.add(ReilHelpers.createBsh(offset++, OperandSize.BYTE, "C", OperandSize.BYTE, "7", OperandSize.BYTE, shiftedC));
-		instructions.add(ReilHelpers.createAnd(baseOffset + instructions.size(), OperandSize.BYTE, source, OperandSize.BYTE, "1", OperandSize.BYTE, "C"));
-		instructions.add(ReilHelpers.createOr(offset++, OperandSize.BYTE, shiftResult, OperandSize.BYTE, shiftedC, OperandSize.BYTE, combinedResult));
+		instructions.add(ReilHelpers.createBsh(offset++, OperandSize.BYTE, source, OperandSize.BYTE, "-1", OperandSize.BYTE, shiftResult, instruction));
+		instructions.add(ReilHelpers.createBsh(offset++, OperandSize.BYTE, "C", OperandSize.BYTE, "7", OperandSize.BYTE, shiftedC, instruction));
+		instructions.add(ReilHelpers.createAnd(baseOffset + instructions.size(), OperandSize.BYTE, source, OperandSize.BYTE, "1", OperandSize.BYTE, "C", instruction));
+		instructions.add(ReilHelpers.createOr(offset++, OperandSize.BYTE, shiftResult, OperandSize.BYTE, shiftedC, OperandSize.BYTE, combinedResult, instruction));
 
 		if (instruction.getOperand() != null)
 		{
-			instructions.add(ReilHelpers.createStm(offset++, OperandSize.BYTE, combinedResult, OperandSize.WORD, target));
+			instructions.add(ReilHelpers.createStm(offset++, OperandSize.BYTE, combinedResult, OperandSize.WORD, target, instruction));
 		}
 
-		instructions.addAll(FlagTranslator.translateZ(environment, baseOffset + instructions.size(), combinedResult));
-		instructions.addAll(FlagTranslator.translateN(environment, baseOffset + instructions.size(), combinedResult));
+		instructions.addAll(FlagTranslator.translateZ(environment, baseOffset + instructions.size(), combinedResult, instruction));
+		instructions.addAll(FlagTranslator.translateN(environment, baseOffset + instructions.size(), combinedResult, instruction));
 
 		return instructions;
 	}

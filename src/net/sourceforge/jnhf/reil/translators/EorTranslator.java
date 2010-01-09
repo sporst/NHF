@@ -18,14 +18,14 @@ public class EorTranslator
 		final int baseOffset = instruction.getAddress() * 0x100;
 		int offset = baseOffset;
 
-		final TranslationResult operandResult = OperandTranslator.translate(environment, offset, instruction.getOperand(), true);
+		final TranslationResult operandResult = OperandTranslator.translate(environment, offset, instruction.getOperand(), true, instruction);
 		instructions.addAll(operandResult.getInstructions());
 		offset = baseOffset + instructions.size();
 
-		instructions.add(ReilHelpers.createXor(offset++, OperandSize.BYTE, "A", OperandSize.BYTE, operandResult.getResultRegister(), OperandSize.BYTE, "A"));
+		instructions.add(ReilHelpers.createXor(offset++, OperandSize.BYTE, "A", OperandSize.BYTE, operandResult.getResultRegister(), OperandSize.BYTE, "A", instruction));
 
-		instructions.addAll(FlagTranslator.translateZ(environment, baseOffset + instructions.size(), "A"));
-		instructions.addAll(FlagTranslator.translateN(environment, baseOffset + instructions.size(), "A"));
+		instructions.addAll(FlagTranslator.translateZ(environment, baseOffset + instructions.size(), "A", instruction));
+		instructions.addAll(FlagTranslator.translateN(environment, baseOffset + instructions.size(), "A", instruction));
 
 		return instructions;
 	}

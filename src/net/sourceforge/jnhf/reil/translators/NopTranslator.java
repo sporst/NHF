@@ -14,7 +14,7 @@ public class NopTranslator
 	{
 		final List<ReilInstruction> instructions = new FilledList<ReilInstruction>();
 
-		instructions.add(ReilHelpers.createNop(instruction.getAddress() * 0x100));
+		instructions.add(ReilHelpers.createNop(instruction.getAddress() * 0x100, instruction));
 
 		return instructions;
 	}

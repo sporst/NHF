@@ -24,22 +24,22 @@ public class RtsTranslator
 		final List<ReilInstruction> instructions = new FilledList<ReilInstruction>();
 
 		// Correct the stack
-		instructions.add(ReilHelpers.createAdd(offset++, OperandSize.WORD, "SP", OperandSize.WORD, "1", OperandSize.DWORD, subtractedStackPointer));
-		instructions.add(ReilHelpers.createAnd(offset++, OperandSize.DWORD, subtractedStackPointer, OperandSize.WORD, "65535", OperandSize.WORD, "SP"));
+		instructions.add(ReilHelpers.createAdd(offset++, OperandSize.WORD, "SP", OperandSize.WORD, "1", OperandSize.DWORD, subtractedStackPointer, instruction));
+		instructions.add(ReilHelpers.createAnd(offset++, OperandSize.DWORD, subtractedStackPointer, OperandSize.WORD, "65535", OperandSize.WORD, "SP", instruction));
 
 		// Take return offset off the stack
-		instructions.add(ReilHelpers.createLdm(offset++, OperandSize.WORD, "SP", OperandSize.WORD, loadedAddress));
+		instructions.add(ReilHelpers.createLdm(offset++, OperandSize.WORD, "SP", OperandSize.WORD, loadedAddress, instruction));
 
 		// Add 1 to the return address
-		instructions.add(ReilHelpers.createAdd(offset++, OperandSize.WORD, loadedAddress, OperandSize.BYTE, "1", OperandSize.WORD, addedAddress));
-		instructions.add(ReilHelpers.createAnd(offset++, OperandSize.WORD, addedAddress, OperandSize.BYTE, "255", OperandSize.WORD, correctedAddress));
+		instructions.add(ReilHelpers.createAdd(offset++, OperandSize.WORD, loadedAddress, OperandSize.BYTE, "1", OperandSize.WORD, addedAddress, instruction));
+		instructions.add(ReilHelpers.createAnd(offset++, OperandSize.WORD, addedAddress, OperandSize.BYTE, "255", OperandSize.WORD, correctedAddress, instruction));
 
 		// Correct the stack - Part II
-		instructions.add(ReilHelpers.createAdd(offset++, OperandSize.WORD, "SP", OperandSize.WORD, "1", OperandSize.DWORD, subtractedStackPointer));
-		instructions.add(ReilHelpers.createAnd(offset++, OperandSize.DWORD, subtractedStackPointer, OperandSize.WORD, "65535", OperandSize.WORD, "SP"));
+		instructions.add(ReilHelpers.createAdd(offset++, OperandSize.WORD, "SP", OperandSize.WORD, "1", OperandSize.DWORD, subtractedStackPointer, instruction));
+		instructions.add(ReilHelpers.createAnd(offset++, OperandSize.DWORD, subtractedStackPointer, OperandSize.WORD, "65535", OperandSize.WORD, "SP", instruction));
 
 		// Jump to the target
-		instructions.add(ReilHelpers.createJcc(offset++, OperandSize.BYTE, "1", OperandSize.WORD, correctedAddress));
+		instructions.add(ReilHelpers.createJcc(offset++, OperandSize.BYTE, "1", OperandSize.WORD, correctedAddress, instruction));
 
 		return instructions;
 	}

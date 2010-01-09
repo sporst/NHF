@@ -14,6 +14,7 @@ import net.sourceforge.jnhf.reil.InternalTranslationException;
 import net.sourceforge.jnhf.reil.ReilHelpers;
 import net.sourceforge.jnhf.tainttracker.AddressFilter;
 import net.sourceforge.jnhf.tainttracker.LogfileConverter;
+import net.sourceforge.jnhf.tainttracker.NativeTaintGraph;
 import net.sourceforge.jnhf.tainttracker.TaintGraph;
 import net.sourceforge.jnhf.tainttracker.TaintGraphFilter;
 import net.sourceforge.jnhf.tainttracker.TaintGraphNode;
@@ -32,9 +33,11 @@ public final class TaintGraphWriter
 		// Step III: Write the file to disk.
 
 		final String logFile = "F:\\fce\\simplified.log";
+//		final String logFile = "F:\\fce\\Faxanadu (U).log";
 		final int address = 0x431;
 
 		final String unfilteredOutputFile = "C:\\foo.gml";
+		final String nativeOutputFile = "C:\\native.gml";
 		final String filtedOutputFile = "C:\\filtered.gml";
 
 		try
@@ -49,7 +52,8 @@ public final class TaintGraphWriter
 
 			System.out.println("Writing graph files to disk");
 
-			FileHelpers.writeTextFile(unfilteredOutputFile, GmlConverter.toGml(graph, new MyEnhancer(address)));
+//			FileHelpers.writeTextFile(unfilteredOutputFile, GmlConverter.toGml(graph, new MyEnhancer(address)));
+			FileHelpers.writeTextFile(nativeOutputFile, GmlConverter.toGml(NativeTaintGraph.convert(graph)));
 			FileHelpers.writeTextFile(filtedOutputFile, GmlConverter.toGml(TaintGraphFilter.filter(graph, new AddressFilter(address)), new MyEnhancer(address)));
 		}
 		catch (final IOException e)

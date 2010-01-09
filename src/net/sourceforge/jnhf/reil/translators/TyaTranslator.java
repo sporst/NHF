@@ -19,9 +19,9 @@ public class TyaTranslator
 
 		final long baseOffset = instruction.getAddress() * 0x100;
 
-		instructions.add(ReilHelpers.createAnd(baseOffset, OperandSize.WORD, "Y", OperandSize.BYTE, "255", OperandSize.BYTE, "A"));
-		instructions.addAll(FlagTranslator.translateZ(environment, baseOffset + instructions.size(), "A"));
-		instructions.addAll(FlagTranslator.translateN(environment, baseOffset + instructions.size(), "A"));
+		instructions.add(ReilHelpers.createAnd(baseOffset, OperandSize.WORD, "Y", OperandSize.BYTE, "255", OperandSize.BYTE, "A", instruction));
+		instructions.addAll(FlagTranslator.translateZ(environment, baseOffset + instructions.size(), "A", instruction));
+		instructions.addAll(FlagTranslator.translateN(environment, baseOffset + instructions.size(), "A", instruction));
 
 		return instructions;
 	}

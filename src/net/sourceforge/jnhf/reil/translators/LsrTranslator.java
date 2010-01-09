@@ -29,7 +29,7 @@ public class LsrTranslator
 		}
 		else
 		{
-			final TranslationResult operandResult = OperandTranslator.translate(environment, offset, instruction.getOperand(), true);
+			final TranslationResult operandResult = OperandTranslator.translate(environment, offset, instruction.getOperand(), true, instruction);
 			instructions.addAll(operandResult.getInstructions());
 
 			offset = baseOffset + instructions.size();
@@ -40,24 +40,24 @@ public class LsrTranslator
 
 		final String shiftResult = environment.getNextVariableString();
 
-		instructions.add(ReilHelpers.createAnd(offset, OperandSize.BYTE, source, OperandSize.BYTE, "1", OperandSize.BYTE, "C"));
-		instructions.add(ReilHelpers.createBsh(offset++, OperandSize.BYTE, source, OperandSize.BYTE, "-1", OperandSize.BYTE, shiftResult));
+		instructions.add(ReilHelpers.createAnd(offset, OperandSize.BYTE, source, OperandSize.BYTE, "1", OperandSize.BYTE, "C", instruction));
+		instructions.add(ReilHelpers.createBsh(offset++, OperandSize.BYTE, source, OperandSize.BYTE, "-1", OperandSize.BYTE, shiftResult, instruction));
 
 		if (instruction.getOperand() == null)
 		{
-			instructions.add(ReilHelpers.createStr(offset++, OperandSize.BYTE, shiftResult, OperandSize.BYTE, "A"));
+			instructions.add(ReilHelpers.createStr(offset++, OperandSize.BYTE, shiftResult, OperandSize.BYTE, "A", instruction));
 
 			result = "A";
 		}
 		else
 		{
-			instructions.add(ReilHelpers.createStm(offset++, OperandSize.BYTE, shiftResult, OperandSize.WORD, target));
+			instructions.add(ReilHelpers.createStm(offset++, OperandSize.BYTE, shiftResult, OperandSize.WORD, target, instruction));
 
 			result = shiftResult;
 		}
 
-		instructions.addAll(FlagTranslator.translateZ(environment, baseOffset + instructions.size(), result));
-		instructions.addAll(FlagTranslator.translateN(environment, baseOffset + instructions.size(), result));
+		instructions.addAll(FlagTranslator.translateZ(environment, baseOffset + instructions.size(), result, instruction));
+		instructions.addAll(FlagTranslator.translateN(environment, baseOffset + instructions.size(), result, instruction));
 
 		return instructions;
 	}

@@ -16,7 +16,7 @@ public class TaxTranslator
 	{
 		final int offset = instruction.getAddress() * 0x100;
 
-		return ListHelpers.list(ReilHelpers.createStr(offset, OperandSize.BYTE, "A", OperandSize.BYTE, "X"));
+		return ListHelpers.list(ReilHelpers.createStr(offset, OperandSize.BYTE, "A", OperandSize.BYTE, "X", instruction));
 	}
 
 }

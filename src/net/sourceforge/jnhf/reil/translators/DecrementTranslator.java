@@ -20,11 +20,11 @@ public class DecrementTranslator
 
 		final String subtractResult = environment.getNextVariableString();
 
-		instructions.add(ReilHelpers.createSub(offset++, OperandSize.BYTE, operand, OperandSize.BYTE, "1", OperandSize.WORD, subtractResult));
-		instructions.add(ReilHelpers.createAnd(offset++, OperandSize.WORD, subtractResult, OperandSize.BYTE, "255", OperandSize.BYTE, operand));
+		instructions.add(ReilHelpers.createSub(offset++, OperandSize.BYTE, operand, OperandSize.BYTE, "1", OperandSize.WORD, subtractResult, instruction));
+		instructions.add(ReilHelpers.createAnd(offset++, OperandSize.WORD, subtractResult, OperandSize.BYTE, "255", OperandSize.BYTE, operand, instruction));
 
-		instructions.addAll(FlagTranslator.translateZ(environment, baseOffset + instructions.size(), operand));
-		instructions.addAll(FlagTranslator.translateN(environment, baseOffset + instructions.size(), operand));
+		instructions.addAll(FlagTranslator.translateZ(environment, baseOffset + instructions.size(), operand, instruction));
+		instructions.addAll(FlagTranslator.translateN(environment, baseOffset + instructions.size(), operand, instruction));
 
 		return instructions;
 	}

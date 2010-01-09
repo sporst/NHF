@@ -13,14 +13,8 @@ public class TaintGraphNode implements IGraphNode<TaintGraphNode>
 	private final List<TaintGraphNode> m_children = new FilledList<TaintGraphNode>();
 
 	private final List<TaintGraphNode> m_parents = new FilledList<TaintGraphNode>();
-	
-	private final ReilInstruction m_instruction;
 
-	public TaintGraphNode(final ReilInstruction instruction, final AbstractStore store)
-	{
-		m_instruction = instruction;
-		m_store = store;
-	}
+	private final ReilInstruction m_instruction;
 
 	public static void link(final TaintGraphNode parent, final TaintGraphNode child)
 	{
@@ -28,17 +22,29 @@ public class TaintGraphNode implements IGraphNode<TaintGraphNode>
 		child.m_parents.add(parent);
 	}
 
+	public TaintGraphNode(final ReilInstruction instruction, final AbstractStore store)
+	{
+		m_instruction = instruction;
+		m_store = store;
+	}
+
 	@Override
 	public List<TaintGraphNode> getChildren()
 	{
 		return new FilledList<TaintGraphNode>(m_children);
 	}
-	
+
 	public ReilInstruction getInstruction()
 	{
 		return m_instruction;
 	}
-	
+
+	@Override
+	public List<TaintGraphNode> getParents()
+	{
+		return new FilledList<TaintGraphNode>(m_parents);
+	}
+
 	public AbstractStore getStore()
 	{
 		return m_store;
@@ -48,11 +54,5 @@ public class TaintGraphNode implements IGraphNode<TaintGraphNode>
 	public String toString()
 	{
 		return m_instruction.toString() + " / " + m_store.toString();
-	}
-
-	@Override
-	public List<TaintGraphNode> getParents()
-	{
-		return new FilledList<TaintGraphNode>(m_parents);
 	}
 }

@@ -19,14 +19,14 @@ public class PhpTranslator
 		final long baseOffset = instruction.getAddress() * 0x100;
 		long offset = baseOffset;
 
-		final TranslationResult result = StatusRegisterTranslator.merge(environment, offset);
+		final TranslationResult result = StatusRegisterTranslator.merge(environment, offset, instruction);
 
 		instructions.addAll(result.getInstructions());
 
 		offset = baseOffset + instructions.size();
 
-		instructions.add(ReilHelpers.createStm(baseOffset + instructions.size(), OperandSize.BYTE, result.getResultRegister(), OperandSize.BYTE, "SP"));
-		instructions.addAll(StackTranslator.decrementStackPointer(baseOffset + instructions.size(), environment));
+		instructions.add(ReilHelpers.createStm(baseOffset + instructions.size(), OperandSize.BYTE, result.getResultRegister(), OperandSize.BYTE, "SP", instruction));
+		instructions.addAll(StackTranslator.decrementStackPointer(baseOffset + instructions.size(), environment, instruction));
 
 		return instructions;
 	}

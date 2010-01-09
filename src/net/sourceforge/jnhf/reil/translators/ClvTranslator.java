@@ -15,6 +15,6 @@ public class ClvTranslator
 	{
 		final int offset = instruction.getAddress() * 0x100;
 
-		return ListHelpers.list(ReilHelpers.createStr(offset, OperandSize.BYTE, "0", OperandSize.BYTE, "V"));
+		return ListHelpers.list(ReilHelpers.createStr(offset, OperandSize.BYTE, "0", OperandSize.BYTE, "V", instruction));
 	}
 }

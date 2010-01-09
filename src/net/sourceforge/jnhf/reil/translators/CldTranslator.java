@@ -15,6 +15,6 @@ public class CldTranslator
 	{
 		final int offset = instruction.getAddress() * 0x100;
 
-		return ListHelpers.list(ReilHelpers.createStr(offset, OperandSize.BYTE, "0", OperandSize.BYTE, "D"));
+		return ListHelpers.list(ReilHelpers.createStr(offset, OperandSize.BYTE, "0", OperandSize.BYTE, "D", instruction));
 	}
 }

@@ -18,7 +18,7 @@ public class CompareTranslator
 		final int baseOffset = instruction.getAddress() * 0x100;
 		int offset = baseOffset;
 
-		final TranslationResult operandResult = OperandTranslator.translate(environment, offset, instruction.getOperand(), true);
+		final TranslationResult operandResult = OperandTranslator.translate(environment, offset, instruction.getOperand(), true, instruction);
 		instructions.addAll(operandResult.getInstructions());
 
 		offset = baseOffset + instructions.size();
@@ -26,13 +26,13 @@ public class CompareTranslator
 		final String subtractionResult = environment.getNextVariableString();
 		final String maskedResult = environment.getNextVariableString();
 
-		instructions.add(ReilHelpers.createSub(offset++, OperandSize.BYTE, operand, OperandSize.BYTE, operandResult.getResultRegister(), OperandSize.WORD, subtractionResult));
-		instructions.add(ReilHelpers.createAnd(offset++, OperandSize.WORD, subtractionResult, OperandSize.BYTE, "255", OperandSize.BYTE, maskedResult));
+		instructions.add(ReilHelpers.createSub(offset++, OperandSize.BYTE, operand, OperandSize.BYTE, operandResult.getResultRegister(), OperandSize.WORD, subtractionResult, instruction));
+		instructions.add(ReilHelpers.createAnd(offset++, OperandSize.WORD, subtractionResult, OperandSize.BYTE, "255", OperandSize.BYTE, maskedResult, instruction));
 
-		instructions.addAll(FlagTranslator.translateZ(environment, baseOffset + instructions.size(), maskedResult));
-		instructions.addAll(FlagTranslator.translateN(environment, baseOffset + instructions.size(), maskedResult));
-		instructions.addAll(FlagTranslator.translateC(environment, baseOffset + instructions.size(), subtractionResult));
-		instructions.add(ReilHelpers.createBisz(baseOffset + instructions.size(), OperandSize.BYTE, "C", OperandSize.BYTE, "C"));
+		instructions.addAll(FlagTranslator.translateZ(environment, baseOffset + instructions.size(), maskedResult, instruction));
+		instructions.addAll(FlagTranslator.translateN(environment, baseOffset + instructions.size(), maskedResult, instruction));
+		instructions.addAll(FlagTranslator.translateC(environment, baseOffset + instructions.size(), subtractionResult, instruction));
+		instructions.add(ReilHelpers.createBisz(baseOffset + instructions.size(), OperandSize.BYTE, "C", OperandSize.BYTE, "C", instruction));
 
 		return instructions;
 	}

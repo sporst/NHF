@@ -20,11 +20,11 @@ public class InxTranslator
 
 		final String addResult = environment.getNextVariableString();
 
-		instructions.add(ReilHelpers.createAdd(offset++, OperandSize.BYTE, "X", OperandSize.BYTE, "1", OperandSize.WORD, addResult));
-		instructions.add(ReilHelpers.createAnd(offset++, OperandSize.WORD, addResult, OperandSize.BYTE, "255", OperandSize.BYTE, "X"));
+		instructions.add(ReilHelpers.createAdd(offset++, OperandSize.BYTE, "X", OperandSize.BYTE, "1", OperandSize.WORD, addResult, instruction));
+		instructions.add(ReilHelpers.createAnd(offset++, OperandSize.WORD, addResult, OperandSize.BYTE, "255", OperandSize.BYTE, "X", instruction));
 
-		instructions.addAll(FlagTranslator.translateZ(environment, baseOffset + instructions.size(), "X"));
-		instructions.addAll(FlagTranslator.translateN(environment, baseOffset + instructions.size(), "X"));
+		instructions.addAll(FlagTranslator.translateZ(environment, baseOffset + instructions.size(), "X", instruction));
+		instructions.addAll(FlagTranslator.translateN(environment, baseOffset + instructions.size(), "X", instruction));
 
 		return instructions;
 	}

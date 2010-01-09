@@ -16,7 +16,7 @@ public class TayTranslator
 	{
 		final int offset = instruction.getAddress() * 0x100;
 
-		return ListHelpers.list(ReilHelpers.createStr(offset, OperandSize.BYTE, "A", OperandSize.BYTE, "Y"));
+		return ListHelpers.list(ReilHelpers.createStr(offset, OperandSize.BYTE, "A", OperandSize.BYTE, "Y", instruction));
 	}
 
 }

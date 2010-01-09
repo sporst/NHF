@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.sourceforge.jnhf.disassembler.IAddress;
+import net.sourceforge.jnhf.disassembler.Instruction;
 
 /**
  * Class that's used to store REIL instructions.
@@ -42,6 +43,8 @@ public final class ReilInstruction implements Comparable<ReilInstruction>
 	 */
 	private final Map<String, String> metaData = new HashMap<String, String>();
 
+	private final Instruction originalInstruction;
+
 	/**
 	 * Creates a new ReilInstruction object.
 	 *
@@ -51,9 +54,8 @@ public final class ReilInstruction implements Comparable<ReilInstruction>
 	 * @param secondOperand The second operand of the REIL instruction.
 	 * @param thirdOperand The third operand of the REIL instruction.
 	 */
-	public ReilInstruction(final IAddress offset, final String mnemonic, final ReilOperand firstOperand, final ReilOperand secondOperand, final ReilOperand thirdOperand)
+	public ReilInstruction(final IAddress offset, final String mnemonic, final ReilOperand firstOperand, final ReilOperand secondOperand, final ReilOperand thirdOperand, final Instruction originalInstruction)
 	{
-
 		if (mnemonic == null)
 		{
 			throw new IllegalArgumentException("Error: Argument mnemonic can't be null");
@@ -79,6 +81,7 @@ public final class ReilInstruction implements Comparable<ReilInstruction>
 		this.firstOperand = firstOperand;
 		this.secondOperand = secondOperand;
 		this.thirdOperand = thirdOperand;
+		this.originalInstruction = originalInstruction;
 	}
 
 	/**
@@ -175,6 +178,11 @@ public final class ReilInstruction implements Comparable<ReilInstruction>
 	public ReilOperand getFirstOperand()
 	{
 		return firstOperand;
+	}
+
+	public Instruction getInstruction()
+	{
+		return originalInstruction;
 	}
 
 	/**

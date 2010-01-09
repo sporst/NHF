@@ -20,8 +20,8 @@ public class TxsTranslator
 
 		final String maskedSp = environment.getNextVariableString();
 
-		instructions.add(ReilHelpers.createAnd(baseOffset, OperandSize.WORD, "SP", OperandSize.WORD, String.valueOf(0xFF00), OperandSize.WORD, maskedSp));
-		instructions.add(ReilHelpers.createOr(baseOffset + 1, OperandSize.WORD, maskedSp, OperandSize.BYTE, "X", OperandSize.WORD, "SP"));
+		instructions.add(ReilHelpers.createAnd(baseOffset, OperandSize.WORD, "SP", OperandSize.WORD, String.valueOf(0xFF00), OperandSize.WORD, maskedSp, instruction));
+		instructions.add(ReilHelpers.createOr(baseOffset + 1, OperandSize.WORD, maskedSp, OperandSize.BYTE, "X", OperandSize.WORD, "SP", instruction));
 
 		return instructions;
 	}

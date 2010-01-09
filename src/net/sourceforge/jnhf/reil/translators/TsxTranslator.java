@@ -18,9 +18,9 @@ public class TsxTranslator
 
 		final long baseOffset = instruction.getAddress() * 0x100;
 
-		instructions.add(ReilHelpers.createAnd(baseOffset, OperandSize.WORD, "SP", OperandSize.BYTE, "255", OperandSize.BYTE, "X"));
-		instructions.addAll(FlagTranslator.translateZ(environment, baseOffset + instructions.size(), "X"));
-		instructions.addAll(FlagTranslator.translateN(environment, baseOffset + instructions.size(), "X"));
+		instructions.add(ReilHelpers.createAnd(baseOffset, OperandSize.WORD, "SP", OperandSize.BYTE, "255", OperandSize.BYTE, "X", instruction));
+		instructions.addAll(FlagTranslator.translateZ(environment, baseOffset + instructions.size(), "X", instruction));
+		instructions.addAll(FlagTranslator.translateN(environment, baseOffset + instructions.size(), "X", instruction));
 
 		return instructions;
 	}

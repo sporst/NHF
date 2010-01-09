@@ -22,8 +22,8 @@ public class BneTranslator
 
 		final List<ReilInstruction> instructions = new FilledList<ReilInstruction>();
 
-		instructions.add(ReilHelpers.createBisz(offset++, OperandSize.BYTE, "Z", OperandSize.BYTE, negatedZ));
-		instructions.add(ReilHelpers.createJcc(offset++, OperandSize.BYTE, negatedZ, OperandSize.WORD, jumpTarget));
+		instructions.add(ReilHelpers.createBisz(offset++, OperandSize.BYTE, "Z", OperandSize.BYTE, negatedZ, instruction));
+		instructions.add(ReilHelpers.createJcc(offset++, OperandSize.BYTE, negatedZ, OperandSize.WORD, jumpTarget, instruction));
 
 		return instructions;
 	}

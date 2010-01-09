@@ -23,8 +23,8 @@ public class BplTranslator
 
 		final List<ReilInstruction> instructions = new FilledList<ReilInstruction>();
 
-		instructions.add(ReilHelpers.createBisz(offset++, OperandSize.BYTE, "N", OperandSize.BYTE, negatedN));
-		instructions.add(ReilHelpers.createJcc(offset++, OperandSize.BYTE, negatedN, OperandSize.WORD, jumpTarget));
+		instructions.add(ReilHelpers.createBisz(offset++, OperandSize.BYTE, "N", OperandSize.BYTE, negatedN, instruction));
+		instructions.add(ReilHelpers.createJcc(offset++, OperandSize.BYTE, negatedN, OperandSize.WORD, jumpTarget, instruction));
 
 		return instructions;
 	}

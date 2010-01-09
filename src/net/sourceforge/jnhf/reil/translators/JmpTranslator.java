@@ -23,13 +23,13 @@ public class JmpTranslator
 		{
 			final String jumpTarget = TranslationHelpers.toReilImmediate(instruction.getOperand().getRoot());
 
-			return ListHelpers.list(ReilHelpers.createJcc(baseOffset, OperandSize.BYTE, "1", OperandSize.WORD, jumpTarget));
+			return ListHelpers.list(ReilHelpers.createJcc(baseOffset, OperandSize.BYTE, "1", OperandSize.WORD, jumpTarget, instruction));
 		}
 		else
 		{
 			final IFilledList<ReilInstruction> instructions = new FilledList<ReilInstruction>();
 
-			final TranslationResult operandResult = OperandTranslator.translate(environment, baseOffset, instruction.getOperand(), true);
+			final TranslationResult operandResult = OperandTranslator.translate(environment, baseOffset, instruction.getOperand(), true, instruction);
 
 			instructions.addAll(operandResult.getInstructions());
 
@@ -37,7 +37,7 @@ public class JmpTranslator
 
 			final String loadedAddress = environment.getNextVariableString();
 
-			instructions.add(ReilHelpers.createJcc(offset++, OperandSize.BYTE, "1", OperandSize.WORD, loadedAddress));
+			instructions.add(ReilHelpers.createJcc(offset++, OperandSize.BYTE, "1", OperandSize.WORD, loadedAddress, instruction));
 
 			return instructions;
 		}

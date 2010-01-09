@@ -23,8 +23,8 @@ public class BvcTranslator
 
 		final List<ReilInstruction> instructions = new FilledList<ReilInstruction>();
 
-		instructions.add(ReilHelpers.createBisz(offset++, OperandSize.BYTE, "V", OperandSize.BYTE, negatedV));
-		instructions.add(ReilHelpers.createJcc(offset++, OperandSize.BYTE, negatedV, OperandSize.WORD, jumpTarget));
+		instructions.add(ReilHelpers.createBisz(offset++, OperandSize.BYTE, "V", OperandSize.BYTE, negatedV, instruction));
+		instructions.add(ReilHelpers.createJcc(offset++, OperandSize.BYTE, negatedV, OperandSize.WORD, jumpTarget, instruction));
 
 		return instructions;
 	}

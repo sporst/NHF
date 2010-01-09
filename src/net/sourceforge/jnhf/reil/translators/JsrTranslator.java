@@ -23,16 +23,16 @@ public class JsrTranslator
 
 		final List<ReilInstruction> instructions = new FilledList<ReilInstruction>();
 
-		instructions.add(ReilHelpers.createSub(offset++, OperandSize.WORD, "SP", OperandSize.BYTE, "1", OperandSize.DWORD, subtractedStackPointer));
-		instructions.add(ReilHelpers.createAnd(offset++, OperandSize.DWORD, subtractedStackPointer, OperandSize.WORD, "65535", OperandSize.WORD, "SP"));
+		instructions.add(ReilHelpers.createSub(offset++, OperandSize.WORD, "SP", OperandSize.BYTE, "1", OperandSize.DWORD, subtractedStackPointer, instruction));
+		instructions.add(ReilHelpers.createAnd(offset++, OperandSize.DWORD, subtractedStackPointer, OperandSize.WORD, "65535", OperandSize.WORD, "SP", instruction));
 
 		// Push offset + 2 onto the stack
-		instructions.add(ReilHelpers.createStm(offset++, OperandSize.WORD, String.valueOf(instruction.getAddress() + 2), OperandSize.WORD, "SP"));
+		instructions.add(ReilHelpers.createStm(offset++, OperandSize.WORD, String.valueOf(instruction.getAddress() + 2), OperandSize.WORD, "SP", instruction));
 
-		instructions.add(ReilHelpers.createSub(offset++, OperandSize.WORD, "SP", OperandSize.BYTE, "1", OperandSize.DWORD, subtractedStackPointer));
-		instructions.add(ReilHelpers.createAnd(offset++, OperandSize.DWORD, subtractedStackPointer, OperandSize.WORD, "65535", OperandSize.WORD, "SP"));
+		instructions.add(ReilHelpers.createSub(offset++, OperandSize.WORD, "SP", OperandSize.BYTE, "1", OperandSize.DWORD, subtractedStackPointer, instruction));
+		instructions.add(ReilHelpers.createAnd(offset++, OperandSize.DWORD, subtractedStackPointer, OperandSize.WORD, "65535", OperandSize.WORD, "SP", instruction));
 
-		instructions.add(ReilHelpers.createJcc(offset++, OperandSize.BYTE, "1", OperandSize.WORD, jumpTarget));
+		instructions.add(ReilHelpers.createJcc(offset++, OperandSize.BYTE, "1", OperandSize.WORD, jumpTarget, instruction));
 
 		return instructions;
 	}

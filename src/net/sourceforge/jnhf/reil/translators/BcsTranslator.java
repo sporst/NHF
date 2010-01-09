@@ -17,7 +17,7 @@ public class BcsTranslator
 		final int offset = instruction.getAddress() * 0x100;
 		final String jumpTarget = instruction.getOperand().getRoot().getValue();
 
-		return ListHelpers.list(ReilHelpers.createJcc(offset, OperandSize.BYTE, "C", OperandSize.WORD, jumpTarget));
+		return ListHelpers.list(ReilHelpers.createJcc(offset, OperandSize.BYTE, "C", OperandSize.WORD, jumpTarget, instruction));
 	}
 
 }

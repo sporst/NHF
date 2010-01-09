@@ -17,13 +17,13 @@ public class StoreTranslator
 
 		int offset = instruction.getAddress() * 0x100;
 
-		final TranslationResult operandResult = OperandTranslator.translate(environment, offset, instruction.getOperand(), false);
+		final TranslationResult operandResult = OperandTranslator.translate(environment, offset, instruction.getOperand(), false, instruction);
 
 		instructions.addAll(operandResult.getInstructions());
 
 		offset = instruction.getAddress() * 0x100 + instructions.size();
 
-		instructions.add(ReilHelpers.createStm(offset, OperandSize.BYTE, storeRegister, operandResult.getResultSize(), operandResult.getResultRegister()));
+		instructions.add(ReilHelpers.createStm(offset, OperandSize.BYTE, storeRegister, operandResult.getResultSize(), operandResult.getResultRegister(), instruction));
 
 		return instructions;
 	}

@@ -20,10 +20,10 @@ public class PlpTranslator
 
 		final String loadedValue = environment.getNextVariableString();
 
-		instructions.addAll(StackTranslator.incrementStackPointer(baseOffset + instructions.size(), environment));
+		instructions.addAll(StackTranslator.incrementStackPointer(baseOffset + instructions.size(), environment, instruction));
 
-		instructions.add(ReilHelpers.createLdm(baseOffset + instructions.size(), OperandSize.BYTE, "SP", OperandSize.BYTE, loadedValue));
-		instructions.addAll(StatusRegisterTranslator.split(environment, baseOffset + instructions.size(), loadedValue));
+		instructions.add(ReilHelpers.createLdm(baseOffset + instructions.size(), OperandSize.BYTE, "SP", OperandSize.BYTE, loadedValue, instruction));
+		instructions.addAll(StatusRegisterTranslator.split(environment, baseOffset + instructions.size(), loadedValue, instruction));
 
 		return instructions;
 	}

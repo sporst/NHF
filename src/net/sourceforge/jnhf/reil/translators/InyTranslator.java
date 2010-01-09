@@ -20,11 +20,11 @@ public class InyTranslator
 
 		final String addResult = environment.getNextVariableString();
 
-		instructions.add(ReilHelpers.createAdd(offset++, OperandSize.BYTE, "Y", OperandSize.BYTE, "1", OperandSize.WORD, addResult));
-		instructions.add(ReilHelpers.createAnd(offset++, OperandSize.WORD, addResult, OperandSize.BYTE, "255", OperandSize.BYTE, "Y"));
+		instructions.add(ReilHelpers.createAdd(offset++, OperandSize.BYTE, "Y", OperandSize.BYTE, "1", OperandSize.WORD, addResult, instruction));
+		instructions.add(ReilHelpers.createAnd(offset++, OperandSize.WORD, addResult, OperandSize.BYTE, "255", OperandSize.BYTE, "Y", instruction));
 
-		instructions.addAll(FlagTranslator.translateZ(environment, baseOffset + instructions.size(), "Y"));
-		instructions.addAll(FlagTranslator.translateN(environment, baseOffset + instructions.size(), "Y"));
+		instructions.addAll(FlagTranslator.translateZ(environment, baseOffset + instructions.size(), "Y", instruction));
+		instructions.addAll(FlagTranslator.translateN(environment, baseOffset + instructions.size(), "Y", instruction));
 
 		return instructions;
 	}

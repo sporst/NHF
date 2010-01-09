@@ -28,7 +28,7 @@ public class AslTranslator
 		}
 		else
 		{
-			final TranslationResult operandResult = OperandTranslator.translate(environment, offset, instruction.getOperand(), true);
+			final TranslationResult operandResult = OperandTranslator.translate(environment, offset, instruction.getOperand(), true, instruction);
 			instructions.addAll(operandResult.getInstructions());
 
 			offset = baseOffset + instructions.size();
@@ -40,17 +40,17 @@ public class AslTranslator
 		final String shiftResult = environment.getNextVariableString();
 		final String truncatedResult = instruction.getOperand() == null ? "A" : environment.getNextVariableString();
 
-		instructions.add(ReilHelpers.createBsh(offset++, OperandSize.BYTE, source, OperandSize.BYTE, "1", OperandSize.WORD, shiftResult));
-		instructions.add(ReilHelpers.createAnd(offset++, OperandSize.WORD, shiftResult, OperandSize.BYTE, "255", OperandSize.BYTE, truncatedResult));
+		instructions.add(ReilHelpers.createBsh(offset++, OperandSize.BYTE, source, OperandSize.BYTE, "1", OperandSize.WORD, shiftResult, instruction));
+		instructions.add(ReilHelpers.createAnd(offset++, OperandSize.WORD, shiftResult, OperandSize.BYTE, "255", OperandSize.BYTE, truncatedResult, instruction));
 
 		if (instruction.getOperand() != null)
 		{
-			instructions.add(ReilHelpers.createStm(offset++, OperandSize.BYTE, truncatedResult, OperandSize.WORD, target));
+			instructions.add(ReilHelpers.createStm(offset++, OperandSize.BYTE, truncatedResult, OperandSize.WORD, target, instruction));
 		}
 
-		instructions.addAll(FlagTranslator.translateZ(environment, baseOffset + instructions.size(), truncatedResult));
-		instructions.addAll(FlagTranslator.translateN(environment, baseOffset + instructions.size(), truncatedResult));
-		instructions.addAll(FlagTranslator.translateC(environment, baseOffset + instructions.size(), shiftResult));
+		instructions.addAll(FlagTranslator.translateZ(environment, baseOffset + instructions.size(), truncatedResult, instruction));
+		instructions.addAll(FlagTranslator.translateN(environment, baseOffset + instructions.size(), truncatedResult, instruction));
+		instructions.addAll(FlagTranslator.translateC(environment, baseOffset + instructions.size(), shiftResult, instruction));
 
 		return instructions;
 	}

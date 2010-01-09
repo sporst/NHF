@@ -19,8 +19,8 @@ public class PhaTranslator
 		final long baseOffset = instruction.getAddress() * 0x100;
 		final long offset = baseOffset;
 
-		instructions.add(ReilHelpers.createStm(baseOffset + instructions.size(), OperandSize.BYTE, "A", OperandSize.BYTE, "SP"));
-		instructions.addAll(StackTranslator.decrementStackPointer(baseOffset + instructions.size(), environment));
+		instructions.add(ReilHelpers.createStm(baseOffset + instructions.size(), OperandSize.BYTE, "A", OperandSize.BYTE, "SP", instruction));
+		instructions.addAll(StackTranslator.decrementStackPointer(baseOffset + instructions.size(), environment, instruction));
 
 		return instructions;
 	}

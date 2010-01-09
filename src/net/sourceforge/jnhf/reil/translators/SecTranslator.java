@@ -16,7 +16,7 @@ public class SecTranslator
 	{
 		final int offset = instruction.getAddress() * 0x100;
 
-		return ListHelpers.list(ReilHelpers.createStr(offset, OperandSize.BYTE, "1", OperandSize.BYTE, "C"));
+		return ListHelpers.list(ReilHelpers.createStr(offset, OperandSize.BYTE, "1", OperandSize.BYTE, "C", instruction));
 	}
 
 }

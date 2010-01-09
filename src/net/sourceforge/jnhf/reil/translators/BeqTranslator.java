@@ -17,7 +17,7 @@ public class BeqTranslator
 		final int offset = instruction.getAddress() * 0x100;
 		final String jumpTarget = instruction.getOperand().getRoot().getValue();
 
-		return ListHelpers.list(ReilHelpers.createJcc(offset, OperandSize.BYTE, "Z", OperandSize.WORD, jumpTarget));
+		return ListHelpers.list(ReilHelpers.createJcc(offset, OperandSize.BYTE, "Z", OperandSize.WORD, jumpTarget, instruction));
 	}
 
 }
