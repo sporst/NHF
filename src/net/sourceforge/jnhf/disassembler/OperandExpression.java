@@ -6,8 +6,16 @@ import net.sourceforge.jnhf.helpers.IFilledList;
 public class OperandExpression
 {
 	private final String m_value;
+
 	private OperandExpression m_parent;
+
 	private final IFilledList<OperandExpression> m_children = new FilledList<OperandExpression>();
+
+	private static void link(final OperandExpression parent, final OperandExpression child)
+	{
+		parent.m_children.add(child);
+		child.m_parent = parent;
+	}
 
 	public OperandExpression(final OperandExpression parent, final String value)
 	{
@@ -17,12 +25,6 @@ public class OperandExpression
 		{
 			link(parent, this);
 		}
-	}
-
-	private static void link(final OperandExpression parent, final OperandExpression child)
-	{
-		parent.m_children.add(child);
-		child.m_parent = parent;
 	}
 
 	public FilledList<OperandExpression> getChildren()
@@ -35,20 +37,16 @@ public class OperandExpression
 		if (m_value.equals("["))
 		{
 			return ExpressionType.MemoryDereference;
-		}
-		else if (m_value.equals("("))
+		} else if (m_value.equals("("))
 		{
 			return ExpressionType.IndirectMemoryDereference;
-		}
-		else if (m_value.length() == 4)
+		} else if (m_value.length() == 4)
 		{
 			return ExpressionType.Integer;
-		}
-		else if (m_value.equals("+"))
+		} else if (m_value.equals("+"))
 		{
 			return ExpressionType.Operator;
-		}
-		else
+		} else
 		{
 			return ExpressionType.Register;
 		}

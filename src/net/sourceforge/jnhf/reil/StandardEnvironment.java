@@ -17,7 +17,8 @@ public class StandardEnvironment {
     }
 
     public String getNextVariableString() {
-	return String.format("t%d", generateNextVariable());
+    	return "t" + generateNextVariable();
+//	return String.format("t%d", generateNextVariable());
     }
 
     public void nextInstruction() {

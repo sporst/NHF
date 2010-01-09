@@ -8,6 +8,11 @@ import java.util.Map;
  */
 public final class GmlConverter
 {
+	public static <T extends IGraphNode<T>> String toGml(final IDirectedGraph<T> graph)
+	{
+		return toGml(graph, null);
+	}
+
 	/**
 	 * Creates GML code that represents a given directed graph.
 	 *
@@ -15,7 +20,7 @@ public final class GmlConverter
 	 *
 	 * @return The code generated for the input graph.
 	 */
-	public static <T extends IGraphNode<T>> String toGml(final IDirectedGraph<T> graph)
+	public static <T extends IGraphNode<T>> String toGml(final IDirectedGraph<T> graph, final IGmlEnhancer<T> enhancer)
 	{
 		if (graph == null)
 		{
@@ -31,20 +36,23 @@ public final class GmlConverter
 
 		final Map<Object, Integer> nodeMap = new HashMap<Object, Integer>();
 
-		for (final IGraphNode<?> node : graph.getNodes())
+		for (final T node : graph.getNodes())
 		{
 			sb.append("\tnode\n");
 			sb.append("\t[\n");
 			sb.append("\tid " + currentId + "\n");
 			sb.append("\tlabel \"" + node + "\"\n");
-			if (node.toString().contains("ldm") || node.toString().contains("stm"))
+
+			final String enhancedText = enhancer == null ? null : enhancer.enhance(node);
+
+			if (enhancedText != null)
 			{
-				sb.append("graphics [ fill \"#FF0000\" ]\n");
+				sb.append("\tgraphics");
+				sb.append("\t[");
+				sb.append(enhancedText + "\n");
+				sb.append("\t]");
 			}
-			if (node.toString().contains("jcc"))
-			{
-				sb.append("graphics [ fill \"#00FF00\" ]\n");
-			}
+
 			sb.append("\t]\n");
 
 			nodeMap.put(node, currentId);

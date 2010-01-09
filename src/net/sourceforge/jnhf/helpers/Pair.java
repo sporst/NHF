@@ -18,6 +18,11 @@ public class Pair<S, T>
 	 */
 	private final T second;
 
+	public static <S, T> Pair<S, T> make(final S first, final T second)
+	{
+		return new Pair<S,T>(first, second);
+	}
+
 	/**
 	 * Creates a new pair.
 	 *
@@ -30,15 +35,10 @@ public class Pair<S, T>
 		this.second = second;
 	}
 
-	public static <S, T> Pair<S, T> make(final S first, final T second)
-	{
-		return new Pair<S,T>(first, second);
-	}
-
 	@Override
 	public boolean equals(final Object obj)
 	{
-		if (!(obj instanceof Pair))
+		if (!(obj instanceof Pair<?, ?>))
 		{
 			return false;
 		}
@@ -46,8 +46,8 @@ public class Pair<S, T>
 		final Pair<?, ?> p = (Pair<?, ?>) obj;
 
 		return
-			(p.first != null && p.first.equals(first) || p.first == null && first == null) &&
-			(p.second != null && p.second.equals(second) || p.second == null && second == null);
+		(p.first != null && p.first.equals(first) || p.first == null && first == null) &&
+		(p.second != null && p.second.equals(second) || p.second == null && second == null);
 	}
 
 	/**

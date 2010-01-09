@@ -17,13 +17,8 @@ public class TaintGraphBuilder
 	private final Map<AbstractStore, TaintGraphNode> m_lastNodes = new HashMap<AbstractStore, TaintGraphNode>();
 
 	private final List<TaintGraphNode> m_rootNodes = new FilledList<TaintGraphNode>();
-	
-	private TaintGraph m_graph = new TaintGraph();
-	
-	public TaintGraph getGraph()
-	{
-		return m_graph;
-	}
+
+	private final TaintGraph m_graph = new TaintGraph();
 
 	private void handleAdd(final ReilInstruction instruction)
 	{
@@ -42,15 +37,15 @@ public class TaintGraphBuilder
 	private void handleJcc(final ReilInstruction instruction)
 	{
 		final ReilOperand operand3 = instruction.getThirdOperand();
-		
+
 		final AbstractStore store3 = new AbstractStore(operand3);
 		final TaintGraphNode outputNode = new TaintGraphNode(instruction, store3);
-		
+
 		processOperand(instruction.getFirstOperand(), instruction, outputNode);
-		
+
 		m_graph.add(outputNode);
 	}
-	
+
 	private void handleLdm(final ReilInstruction instruction, IAddress address)
 	{
 		if (address == null && instruction.getFirstOperand().getType() == OperandType.INTEGER_LITERAL)
@@ -60,7 +55,9 @@ public class TaintGraphBuilder
 
 		if (address == null)
 		{
-			return;
+			System.out.println(instruction);
+
+			throw new IllegalStateException();
 		}
 
 		// TODO: LDM is broken
@@ -104,7 +101,9 @@ public class TaintGraphBuilder
 
 		if (address == null)
 		{
-			return;
+			System.out.println(instruction);
+
+			throw new IllegalStateException();
 		}
 
 		final AbstractStore store3 = new AbstractStore(address);
@@ -176,6 +175,11 @@ public class TaintGraphBuilder
 
 			throw new IllegalStateException();
 		}
+	}
+
+	public TaintGraph getGraph()
+	{
+		return m_graph;
 	}
 
 }
