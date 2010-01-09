@@ -37,6 +37,14 @@ public final class GmlConverter
 			sb.append("\t[\n");
 			sb.append("\tid " + currentId + "\n");
 			sb.append("\tlabel \"" + node + "\"\n");
+			if (node.toString().contains("ldm") || node.toString().contains("stm"))
+			{
+				sb.append("graphics [ fill \"#FF0000\" ]\n");
+			}
+			if (node.toString().contains("jcc"))
+			{
+				sb.append("graphics [ fill \"#00FF00\" ]\n");
+			}
 			sb.append("\t]\n");
 
 			nodeMap.put(node, currentId);

@@ -19,8 +19,11 @@ import net.sourceforge.jnhf.reil.InternalTranslationException;
 import net.sourceforge.jnhf.reil.ReilGraph;
 import net.sourceforge.jnhf.reil.ReilInstruction;
 import net.sourceforge.jnhf.reil.ReilTranslator;
+import net.sourceforge.jnhf.tainttracker.AddressFilter;
 import net.sourceforge.jnhf.tainttracker.TaintElement;
 import net.sourceforge.jnhf.tainttracker.TaintGraph;
+import net.sourceforge.jnhf.tainttracker.TaintGraphBuilder;
+import net.sourceforge.jnhf.tainttracker.TaintGraphFilter;
 
 public class TraceLogParser
 {
@@ -30,8 +33,8 @@ public class TraceLogParser
 	{
 		try
 		{
-			final TaintGraph graph = new TaintGraph();
-
+			TaintGraphBuilder builder = new TaintGraphBuilder();
+			
 			final IFilledList<TraceLogLine> lines = parse(new File("F:\\fce\\Faxanadu (U).log"));
 
 			for (final TraceLogLine traceLogLine : lines)
@@ -44,15 +47,18 @@ public class TraceLogParser
 
 				System.out.println(reil.getNodes().get(0).getInstructions());
 
-				final IAddress address = traceLogLine.getMemoryAddress() == null ? null : new CAddress(Long.valueOf(traceLogLine.getMemoryAddress(), 16));
+				final IAddress address = getMemoryAddress(traceLogLine);
 
 				for (final ReilInstruction reilInstruction : reil.getNodes().get(0).getInstructions())
 				{
-					graph.add(new TaintElement(reilInstruction, address));
+					builder.add(new TaintElement(reilInstruction, address));
 				}
 			}
+			
+			TaintGraph graph = builder.getGraph();
 
-			FileHelpers.writeTextFile("C:\\foo.gml", GmlConverter.toGml(graph));
+//			FileHelpers.writeTextFile("C:\\foo.gml", GmlConverter.toGml(graph));
+			FileHelpers.writeTextFile("C:\\filtered.gml", GmlConverter.toGml(TaintGraphFilter.filter(graph, new AddressFilter(0x431))));
 		}
 		catch (final IOException e)
 		{
@@ -71,6 +77,16 @@ public class TraceLogParser
 		}
 	}
 
+	private static IAddress getMemoryAddress(TraceLogLine traceLogLine)
+	{
+		if (traceLogLine.getInstruction().startsWith("PHA"))
+		{
+			return new CAddress(0x10000 + Long.valueOf(traceLogLine.getValueS(), 16));
+		}
+		
+		return traceLogLine.getMemoryAddress() == null ? null : new CAddress(Long.valueOf(traceLogLine.getMemoryAddress(), 16));
+	}
+
 	public static IFilledList<TraceLogLine> parse(final File file) throws IOException, IllegalTraceLineException
 	{
 		final BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -83,7 +99,7 @@ public class TraceLogParser
 
 		while ((currentLine = reader.readLine()) != null)
 		{
-			if (counter++ == 700) break;
+//			if (counter++ == 11) break;
 
 			final TraceLogLine line = parseLine(currentLine);
 

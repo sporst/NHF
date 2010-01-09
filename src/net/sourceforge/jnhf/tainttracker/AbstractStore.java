@@ -8,6 +8,11 @@ public class AbstractStore
 	private final ReilOperand m_operand;
 	private final IAddress m_address;
 
+	public IAddress getAddress()
+	{
+		return m_address;
+	}
+	
 	public AbstractStore(final IAddress address)
 	{
 		if (address == null)
