@@ -32,8 +32,8 @@ public final class TaintGraphWriter
 		// Step II : Create a taint graph from the parsed file
 		// Step III: Write the file to disk.
 
-		final String logFile = "F:\\fce\\simplified.log";
-//		final String logFile = "F:\\fce\\Faxanadu (U).log";
+//		final String logFile = "F:\\fce\\simplified.log";
+		final String logFile = "F:\\fce\\Faxanadu (U).log";
 		final int address = 0x431;
 
 		final String unfilteredOutputFile = "C:\\foo.gml";
@@ -53,8 +53,11 @@ public final class TaintGraphWriter
 			System.out.println("Writing graph files to disk");
 
 //			FileHelpers.writeTextFile(unfilteredOutputFile, GmlConverter.toGml(graph, new MyEnhancer(address)));
-			FileHelpers.writeTextFile(nativeOutputFile, GmlConverter.toGml(NativeTaintGraph.convert(graph)));
-			FileHelpers.writeTextFile(filtedOutputFile, GmlConverter.toGml(TaintGraphFilter.filter(graph, new AddressFilter(address)), new MyEnhancer(address)));
+
+			final TaintGraph filteredGraph = TaintGraphFilter.filter(graph, new AddressFilter(address));
+
+			FileHelpers.writeTextFile(nativeOutputFile, GmlConverter.toGml(NativeTaintGraph.convert(filteredGraph)));
+			FileHelpers.writeTextFile(filtedOutputFile, GmlConverter.toGml(filteredGraph, new MyEnhancer(address)));
 		}
 		catch (final IOException e)
 		{
@@ -88,9 +91,13 @@ public final class TaintGraphWriter
 			{
 				return "fill \"#00FFFF\"";
 			}
-			else if (ReilHelpers.OPCODE_LDM.equals(mnemonic) || ReilHelpers.OPCODE_STM.equals(mnemonic))
+			else if (ReilHelpers.OPCODE_LDM.equals(mnemonic))
 			{
 				return "fill \"#FF0000\"";
+			}
+			else if (ReilHelpers.OPCODE_STM.equals(mnemonic))
+			{
+				return "fill \"#FFFF00\"";
 			}
 			else if (ReilHelpers.OPCODE_JCC.equals(mnemonic))
 			{

@@ -1,5 +1,6 @@
 package net.sourceforge.jnhf.disassembler;
 
+import net.sourceforge.jnhf.helpers.Commafier;
 import net.sourceforge.jnhf.helpers.FilledList;
 import net.sourceforge.jnhf.helpers.IFilledList;
 
@@ -37,16 +38,20 @@ public class OperandExpression
 		if (m_value.equals("["))
 		{
 			return ExpressionType.MemoryDereference;
-		} else if (m_value.equals("("))
+		}
+		else if (m_value.equals("("))
 		{
 			return ExpressionType.IndirectMemoryDereference;
-		} else if (m_value.length() == 4)
+		}
+		else if (m_value.length() == 4)
 		{
 			return ExpressionType.Integer;
-		} else if (m_value.equals("+"))
+		}
+		else if (m_value.equals("+"))
 		{
 			return ExpressionType.Operator;
-		} else
+		}
+		else
 		{
 			return ExpressionType.Register;
 		}
@@ -60,6 +65,8 @@ public class OperandExpression
 	@Override
 	public String toString()
 	{
-		return m_children.isEmpty() ? getValue() : m_children.get(0).toString();
+		return m_children.isEmpty() ?
+			getValue() :
+			Commafier.commafy(m_children);
 	}
 }

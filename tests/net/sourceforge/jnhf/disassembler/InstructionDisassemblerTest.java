@@ -1,4 +1,4 @@
-package disassembler;
+package net.sourceforge.jnhf.disassembler;
 
 import static org.junit.Assert.assertEquals;
 import net.sourceforge.jnhf.disassembler.Instruction;

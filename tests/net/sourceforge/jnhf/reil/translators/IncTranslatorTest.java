@@ -1,20 +1,20 @@
-package reil.translators;
+package net.sourceforge.jnhf.reil.translators;
 
 import java.util.List;
 
 import net.sourceforge.jnhf.disassembler.InstructionDisassembler;
 import net.sourceforge.jnhf.reil.ReilInstruction;
 import net.sourceforge.jnhf.reil.StandardEnvironment;
-import net.sourceforge.jnhf.reil.translators.CmpTranslator;
+import net.sourceforge.jnhf.reil.translators.IncTranslator;
 
 import org.junit.Test;
 
-public class CmpTranslatorTest
+public class IncTranslatorTest
 {
 	@Test
 	public void test()
 	{
-		final List<ReilInstruction> result = CmpTranslator.translate(new StandardEnvironment(), InstructionDisassembler.disassemble(0, "C904"));
+		final List<ReilInstruction> result = IncTranslator.translate(new StandardEnvironment(), InstructionDisassembler.disassemble(0, "E692"));
 
 		System.out.println(result);
 	}

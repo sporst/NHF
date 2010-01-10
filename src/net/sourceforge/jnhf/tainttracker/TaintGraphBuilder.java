@@ -55,12 +55,15 @@ public class TaintGraphBuilder
 
 		if (address == null)
 		{
-			System.out.println(instruction);
-
 			throw new IllegalStateException();
 		}
 
 		// TODO: LDM is broken
+
+		if (instruction.getAddress().toLong() == 0x8A7C02)
+		{
+			System.out.println("oh");
+		}
 
 		final ReilOperand operand3 = instruction.getThirdOperand();
 
@@ -75,13 +78,20 @@ public class TaintGraphBuilder
 		if (!m_lastNodes.containsKey(store1))
 		{
 			m_rootNodes.add(newNode);
-			m_lastNodes.put(store1, newNode);
+//			m_lastNodes.put(store1, newNode);
 		}
 		else
 		{
-			final TaintGraphNode oldNode = m_lastNodes.get(store1);
+			TaintGraphNode.link(m_lastNodes.get(store1), newNode);
+		}
 
-			TaintGraphNode.link(oldNode, newNode);
+		if (instruction.getFirstOperand().getType() == OperandType.REGISTER)
+		{
+			final AbstractStore store2 = new AbstractStore(instruction.getFirstOperand());
+
+			TaintGraphNode.link(m_lastNodes.get(store2), newNode);
+
+			m_lastNodes.put(store2, newNode);
 		}
 
 		TaintGraphNode.link(newNode, outputNode);

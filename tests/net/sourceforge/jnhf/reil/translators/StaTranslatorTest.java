@@ -1,4 +1,4 @@
-package reil.translators;
+package net.sourceforge.jnhf.reil.translators;
 
 import net.sourceforge.jnhf.disassembler.InstructionDisassembler;
 import net.sourceforge.jnhf.reil.InternalTranslationException;

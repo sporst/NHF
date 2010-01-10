@@ -1,4 +1,4 @@
-package reil.translators;
+package net.sourceforge.jnhf.reil.translators;
 
 import net.sourceforge.jnhf.disassembler.InstructionDisassembler;
 import net.sourceforge.jnhf.reil.InternalTranslationException;
@@ -7,12 +7,12 @@ import net.sourceforge.jnhf.reil.ReilTranslator;
 
 import org.junit.Test;
 
-public class RtiTranslatorTest
+public class PhpTranslatorTest
 {
 	@Test
 	public void test() throws InternalTranslationException
 	{
-		final ReilGraph result = ReilTranslator.translate(InstructionDisassembler.disassemble(0, "40"));
+		final ReilGraph result = ReilTranslator.translate(InstructionDisassembler.disassemble(0, "08"));
 
 		System.out.println(result.getNodes().get(0).getInstructions());
 	}

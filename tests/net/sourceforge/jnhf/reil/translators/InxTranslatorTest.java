@@ -1,4 +1,4 @@
-package reil.translators;
+package net.sourceforge.jnhf.reil.translators;
 
 import java.util.List;
 

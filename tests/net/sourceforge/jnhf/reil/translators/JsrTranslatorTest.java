@@ -1,20 +1,20 @@
-package reil.translators;
+package net.sourceforge.jnhf.reil.translators;
 
 import java.util.List;
 
 import net.sourceforge.jnhf.disassembler.InstructionDisassembler;
 import net.sourceforge.jnhf.reil.ReilInstruction;
 import net.sourceforge.jnhf.reil.StandardEnvironment;
-import net.sourceforge.jnhf.reil.translators.OraTranslator;
+import net.sourceforge.jnhf.reil.translators.JsrTranslator;
 
 import org.junit.Test;
 
-public class OraTranslatorTest
+public class JsrTranslatorTest
 {
 	@Test
 	public void test()
 	{
-		final List<ReilInstruction> result = OraTranslator.translate(new StandardEnvironment(), InstructionDisassembler.disassemble(0, "1D2C07"));
+		final List<ReilInstruction> result = JsrTranslator.translate(new StandardEnvironment(), InstructionDisassembler.disassemble(0xC13A, "205EFF"));
 
 		System.out.println(result);
 	}

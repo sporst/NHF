@@ -38,4 +38,10 @@ public class CAddress implements IAddress
 	{
 		return m_value;
 	}
+
+	@Override
+	public String toString()
+	{
+		return toHexString();
+	}
 }

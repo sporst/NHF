@@ -1,4 +1,4 @@
-package reil;
+package net.sourceforge.jnhf.reil;
 
 import net.sourceforge.jnhf.disassembler.Instruction;
 import net.sourceforge.jnhf.disassembler.InstructionDisassembler;
