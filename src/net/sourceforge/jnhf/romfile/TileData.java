@@ -11,6 +11,6 @@ public class TileData
 
 	public byte[] getData()
 	{
-		return data.clone();
+		return data;
 	}
 }
