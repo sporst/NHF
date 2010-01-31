@@ -28,7 +28,7 @@ public class TileDataReader
                 }
             }
 
-            tiles.add(new TileData(tileData));
+            tiles.add(new TileData(i, tileData));
 		}
 
 		return tiles;
