@@ -18,6 +18,11 @@ public class TaintGraphNode implements IGraphNode<TaintGraphNode>
 
 	public static void link(final TaintGraphNode parent, final TaintGraphNode child)
 	{
+		if (parent.getInstruction().getAddress().toLong() == 0xA8C800)
+		{
+			System.out.println("oh");
+		}
+
 		parent.m_children.add(child);
 		child.m_parents.add(parent);
 	}

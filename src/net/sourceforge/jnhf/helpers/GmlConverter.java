@@ -60,17 +60,28 @@ public final class GmlConverter
 			++currentId;
 		}
 
-		for (final IGraphNode<T> node : graph.getNodes())
+		for (final T node : graph.getNodes())
 		{
-			for (final IGraphNode<T> child : node.getChildren())
+			for (final T child : node.getChildren())
 			{
+				final IGmlEdge edgeInformation = enhancer.enhance(node, child);
+
 				sb.append("\tedge\n");
 				sb.append("\t[\n");
 				sb.append("\tsource " + nodeMap.get(node) + "\n");
 				sb.append("\ttarget " + nodeMap.get(child) + "\n");
 				sb.append("\tgraphics\n");
 				sb.append("\t[\n");
-				sb.append("\t\tfill \"#000000\"\n");
+
+				if (edgeInformation == null)
+				{
+					sb.append("\t\tfill \"#000000\"\n");
+				}
+				else
+				{
+					sb.append(String.format("\t\tfill \"#%06X\"\n", edgeInformation.getColor().getRGB() & 0xFFFFFF));
+				}
+
 				sb.append("\t\ttargetArrow \"standard\"\n");
 				sb.append("\t]\n");
 				sb.append("\t]\n");

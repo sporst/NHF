@@ -14,8 +14,8 @@ public class TileDataReader
 		{
 			final byte[] tileData = new byte[64];
 
-            final BitReader reven = new BitReader(data, offset);
-            final BitReader rodd = new BitReader(data, offset + 8);
+            final BitReader reven = new BitReader(data, offset + i * 16);
+            final BitReader rodd = new BitReader(data, offset + 8 + i * 16);
 
             for (int j = 0; j < 8; j++)
             {

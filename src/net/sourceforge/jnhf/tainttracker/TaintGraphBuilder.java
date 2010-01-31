@@ -60,11 +60,6 @@ public class TaintGraphBuilder
 
 		// TODO: LDM is broken
 
-		if (instruction.getAddress().toLong() == 0x8A7C02)
-		{
-			System.out.println("oh");
-		}
-
 		final ReilOperand operand3 = instruction.getThirdOperand();
 
 		final AbstractStore store3 = new AbstractStore(operand3);

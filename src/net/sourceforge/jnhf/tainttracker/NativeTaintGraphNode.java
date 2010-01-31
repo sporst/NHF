@@ -31,6 +31,11 @@ public class NativeTaintGraphNode implements IGraphNode<NativeTaintGraphNode>
 		return new ArrayList<NativeTaintGraphNode>(m_children);
 	}
 
+	public Instruction getInstruction()
+	{
+		return instruction;
+	}
+
 	@Override
 	public List<NativeTaintGraphNode> getParents()
 	{
