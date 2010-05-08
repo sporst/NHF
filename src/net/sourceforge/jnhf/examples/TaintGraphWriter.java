@@ -37,9 +37,10 @@ public final class TaintGraphWriter
 		// Step II : Create a taint graph from the parsed file
 		// Step III: Write the file to disk.
 
-		final String logFile = TaintGraphWriter.class.getResource("simplified.log").getFile(); // "simplified.log";
+//		final String logFile = TaintGraphWriter.class.getResource("simplified.log").getFile(); // "simplified.log";
 //		final String logFile = "F:\\fce\\Faxanadu (U).log";
-		final int address = 0x431;
+		final String logFile = "F:\\fce\\phasechange.txt";
+		final int address = 0x2D3;
 
 		final String unfilteredOutputFile = "C:\\foo.gml";
 		final String nativeOutputFile = "C:\\native.gml";

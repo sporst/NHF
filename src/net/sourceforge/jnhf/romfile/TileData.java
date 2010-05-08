@@ -7,6 +7,11 @@ public class TileData
 
 	public TileData(final int index, final byte[] data)
 	{
+		if (data == null)
+		{
+			throw new IllegalArgumentException("Error: Data argument can not be null");
+		}
+
 		this.index = index;
 		this.data = data.clone();
 	}
