@@ -3,7 +3,7 @@ package net.sourceforge.jnhf.reil;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sourceforge.jnhf.disassembler.CAddress;
+import net.sourceforge.jnhf.disassembler.Address;
 import net.sourceforge.jnhf.disassembler.ExpressionType;
 import net.sourceforge.jnhf.disassembler.IAddress;
 import net.sourceforge.jnhf.disassembler.Instruction;
@@ -197,7 +197,7 @@ public class ReilHelpers
 			throw new IllegalArgumentException("Error: Second size argument can not be null");
 		}
 
-		return createTrinaryInstruction(ReilHelpers.OPCODE_ADD, new CAddress(offset), firstSize, firstValue, secondSize, secondValue, thirdSize, thirdValue, originalInstruction);
+		return createTrinaryInstruction(ReilHelpers.OPCODE_ADD, new Address(offset), firstSize, firstValue, secondSize, secondValue, thirdSize, thirdValue, originalInstruction);
 	}
 
 	/**
@@ -215,7 +215,7 @@ public class ReilHelpers
 	 */
 	public static ReilInstruction createAnd(final long offset, final OperandSize firstSize, final String firstValue, final OperandSize secondSize, final String secondValue, final OperandSize thirdSize, final String thirdValue, final Instruction originalInstruction)
 	{
-		return createTrinaryInstruction(ReilHelpers.OPCODE_AND, new CAddress(offset), firstSize, firstValue, secondSize, secondValue, thirdSize, thirdValue, originalInstruction);
+		return createTrinaryInstruction(ReilHelpers.OPCODE_AND, new Address(offset), firstSize, firstValue, secondSize, secondValue, thirdSize, thirdValue, originalInstruction);
 	}
 
 	/**
@@ -231,7 +231,7 @@ public class ReilHelpers
 	 */
 	public static ReilInstruction createBisz(final long offset, final OperandSize firstSize, final String firstValue, final OperandSize thirdSize, final String thirdValue, final Instruction instruction)
 	{
-		return createBinaryInstruction(ReilHelpers.OPCODE_BISZ, new CAddress(offset), firstSize, firstValue, thirdSize, thirdValue, instruction);
+		return createBinaryInstruction(ReilHelpers.OPCODE_BISZ, new Address(offset), firstSize, firstValue, thirdSize, thirdValue, instruction);
 	}
 
 	/**
@@ -249,12 +249,12 @@ public class ReilHelpers
 	 */
 	public static ReilInstruction createBsh(final long offset, final OperandSize firstSize, final String firstValue, final OperandSize secondSize, final String secondValue, final OperandSize thirdSize, final String thirdValue, final Instruction originalInstruction)
 	{
-		return createTrinaryInstruction(ReilHelpers.OPCODE_BSH, new CAddress(offset), firstSize, firstValue, secondSize, secondValue, thirdSize, thirdValue, originalInstruction);
+		return createTrinaryInstruction(ReilHelpers.OPCODE_BSH, new Address(offset), firstSize, firstValue, secondSize, secondValue, thirdSize, thirdValue, originalInstruction);
 	}
 
 	public static ReilInstruction createDefine(final long offset, final OperandSize firstSize, final String firstValue, final OperandSize secondSize, final String secondValue, final OperandSize thirdSize, final String thirdValue, final Instruction originalInstruction)
 	{
-		return createTrinaryInstruction(ReilHelpers.OPCODE_DEFINE, new CAddress(offset), firstSize, firstValue, secondSize, secondValue, thirdSize, thirdValue, originalInstruction);
+		return createTrinaryInstruction(ReilHelpers.OPCODE_DEFINE, new Address(offset), firstSize, firstValue, secondSize, secondValue, thirdSize, thirdValue, originalInstruction);
 	}
 
 	/**
@@ -272,7 +272,7 @@ public class ReilHelpers
 	 */
 	public static ReilInstruction createDiv(final long offset, final OperandSize firstSize, final String firstValue, final OperandSize secondSize, final String secondValue, final OperandSize thirdSize, final String thirdValue, final Instruction originalInstruction)
 	{
-		return createTrinaryInstruction(ReilHelpers.OPCODE_DIV, new CAddress(offset), firstSize, firstValue, secondSize, secondValue, thirdSize, thirdValue, originalInstruction);
+		return createTrinaryInstruction(ReilHelpers.OPCODE_DIV, new Address(offset), firstSize, firstValue, secondSize, secondValue, thirdSize, thirdValue, originalInstruction);
 	}
 
 	/**
@@ -289,7 +289,7 @@ public class ReilHelpers
 	 */
 	public static ReilInstruction createJcc(final long offset, final OperandSize firstSize, final String firstValue, final OperandSize thirdSize, final String thirdValue, final Instruction originalInstruction, final String ... meta)
 	{
-		return createBinaryInstruction(ReilHelpers.OPCODE_JCC, new CAddress(offset), firstSize, firstValue, thirdSize, thirdValue, originalInstruction, meta);
+		return createBinaryInstruction(ReilHelpers.OPCODE_JCC, new Address(offset), firstSize, firstValue, thirdSize, thirdValue, originalInstruction, meta);
 	}
 
 	/**
@@ -305,7 +305,7 @@ public class ReilHelpers
 	 */
 	public static ReilInstruction createLdm(final long offset, final OperandSize firstSize, final String firstValue, final OperandSize thirdSize, final String thirdValue, final Instruction instruction)
 	{
-		return createBinaryInstruction(ReilHelpers.OPCODE_LDM, new CAddress(offset), firstSize, firstValue, thirdSize, thirdValue, instruction);
+		return createBinaryInstruction(ReilHelpers.OPCODE_LDM, new Address(offset), firstSize, firstValue, thirdSize, thirdValue, instruction);
 	}
 
 	/**
@@ -323,7 +323,7 @@ public class ReilHelpers
 	 */
 	public static ReilInstruction createMod(final long offset, final OperandSize firstSize, final String firstValue, final OperandSize secondSize, final String secondValue, final OperandSize thirdSize, final String thirdValue, final Instruction originalInstruction)
 	{
-		return createTrinaryInstruction(ReilHelpers.OPCODE_MOD, new CAddress(offset), firstSize, firstValue, secondSize, secondValue, thirdSize, thirdValue, originalInstruction);
+		return createTrinaryInstruction(ReilHelpers.OPCODE_MOD, new Address(offset), firstSize, firstValue, secondSize, secondValue, thirdSize, thirdValue, originalInstruction);
 	}
 
 	/**
@@ -341,7 +341,7 @@ public class ReilHelpers
 	 */
 	public static ReilInstruction createMul(final long offset, final OperandSize firstSize, final String firstValue, final OperandSize secondSize, final String secondValue, final OperandSize thirdSize, final String thirdValue, final Instruction originalInstruction)
 	{
-		return createTrinaryInstruction(ReilHelpers.OPCODE_MUL, new CAddress(offset), firstSize, firstValue, secondSize, secondValue, thirdSize, thirdValue, originalInstruction);
+		return createTrinaryInstruction(ReilHelpers.OPCODE_MUL, new Address(offset), firstSize, firstValue, secondSize, secondValue, thirdSize, thirdValue, originalInstruction);
 	}
 
 	/**
@@ -358,7 +358,7 @@ public class ReilHelpers
 		final ReilOperand secondOperand = createOperand(OperandSize.EMPTY, "");
 		final ReilOperand thirdOperand = createOperand(OperandSize.EMPTY, "");
 
-		return new ReilInstruction(new CAddress(offset), ReilHelpers.OPCODE_NOP, firstOperand, secondOperand, thirdOperand, originalInstruction);
+		return new ReilInstruction(new Address(offset), ReilHelpers.OPCODE_NOP, firstOperand, secondOperand, thirdOperand, originalInstruction);
 	}
 
 	public static ReilOperand createOperand(final OperandSize size, final String value)
@@ -386,7 +386,7 @@ public class ReilHelpers
 	 */
 	public static ReilInstruction createOr(final long offset, final OperandSize firstSize, final String firstValue, final OperandSize secondSize, final String secondValue, final OperandSize thirdSize, final String thirdValue, final Instruction originalInstruction)
 	{
-		return createTrinaryInstruction(ReilHelpers.OPCODE_OR, new CAddress(offset), firstSize, firstValue, secondSize, secondValue, thirdSize, thirdValue, originalInstruction);
+		return createTrinaryInstruction(ReilHelpers.OPCODE_OR, new Address(offset), firstSize, firstValue, secondSize, secondValue, thirdSize, thirdValue, originalInstruction);
 	}
 
 	/**
@@ -402,7 +402,7 @@ public class ReilHelpers
 	 */
 	public static ReilInstruction createStm(final long offset, final OperandSize firstSize, final String firstValue, final OperandSize thirdSize, final String thirdValue, final Instruction instruction)
 	{
-		return createBinaryInstruction(ReilHelpers.OPCODE_STM, new CAddress(offset), firstSize, firstValue, thirdSize, thirdValue, instruction);
+		return createBinaryInstruction(ReilHelpers.OPCODE_STM, new Address(offset), firstSize, firstValue, thirdSize, thirdValue, instruction);
 	}
 
 	/**
@@ -418,7 +418,7 @@ public class ReilHelpers
 	 */
 	public static ReilInstruction createStr(final long offset, final OperandSize firstSize, final String firstValue, final OperandSize thirdSize, final String thirdValue, final Instruction instruction)
 	{
-		return createBinaryInstruction(ReilHelpers.OPCODE_STR, new CAddress(offset), firstSize, firstValue, thirdSize, thirdValue, instruction);
+		return createBinaryInstruction(ReilHelpers.OPCODE_STR, new Address(offset), firstSize, firstValue, thirdSize, thirdValue, instruction);
 	}
 
 	/**
@@ -436,7 +436,7 @@ public class ReilHelpers
 	 */
 	public static ReilInstruction createSub(final long offset, final OperandSize firstSize, final String firstValue, final OperandSize secondSize, final String secondValue, final OperandSize thirdSize, final String thirdValue, final Instruction originalInstruction)
 	{
-		return createTrinaryInstruction(ReilHelpers.OPCODE_SUB, new CAddress(offset), firstSize, firstValue, secondSize, secondValue, thirdSize, thirdValue, originalInstruction);
+		return createTrinaryInstruction(ReilHelpers.OPCODE_SUB, new Address(offset), firstSize, firstValue, secondSize, secondValue, thirdSize, thirdValue, originalInstruction);
 	}
 
 	/**
@@ -454,7 +454,7 @@ public class ReilHelpers
 		final ReilOperand secondOperand = createOperand(OperandSize.EMPTY, "");
 		final ReilOperand thirdOperand = createOperand(size, value);
 
-		return new ReilInstruction(new CAddress(offset), ReilHelpers.OPCODE_UNDEF, firstOperand, secondOperand, thirdOperand, originalInstruction);
+		return new ReilInstruction(new Address(offset), ReilHelpers.OPCODE_UNDEF, firstOperand, secondOperand, thirdOperand, originalInstruction);
 	}
 
 	/**
@@ -470,7 +470,7 @@ public class ReilHelpers
 		final ReilOperand secondOperand = createOperand(OperandSize.EMPTY, "");
 		final ReilOperand thirdOperand = createOperand(OperandSize.EMPTY, "");
 
-		return new ReilInstruction(new CAddress(offset), ReilHelpers.OPCODE_UNKNOWN, firstOperand, secondOperand, thirdOperand, originalInstruction);
+		return new ReilInstruction(new Address(offset), ReilHelpers.OPCODE_UNKNOWN, firstOperand, secondOperand, thirdOperand, originalInstruction);
 	}
 
 	/**
@@ -488,7 +488,7 @@ public class ReilHelpers
 	 */
 	public static ReilInstruction createXor(final long offset, final OperandSize firstSize, final String firstValue, final OperandSize secondSize, final String secondValue, final OperandSize thirdSize, final String thirdValue, final Instruction originalInstruction)
 	{
-		return createTrinaryInstruction(ReilHelpers.OPCODE_XOR, new CAddress(offset), firstSize, firstValue, secondSize, secondValue, thirdSize, thirdValue, originalInstruction);
+		return createTrinaryInstruction(ReilHelpers.OPCODE_XOR, new Address(offset), firstSize, firstValue, secondSize, secondValue, thirdSize, thirdValue, originalInstruction);
 	}
 
 	public static ExpressionType getOperandType(final String value)
@@ -619,12 +619,12 @@ public class ReilHelpers
 
 	public static IAddress toNativeAddress(final IAddress address)
 	{
-		return new CAddress(address.toLong() / 0x100);
+		return new Address(address.toLong() / 0x100);
 	}
 
 	public static IAddress toReilAddress(final IAddress address)
 	{
-		return new CAddress(address.toLong() * 0x100);
+		return new Address(address.toLong() * 0x100);
 	}
 
 	public static boolean uses(final ReilInstruction instruction, final String register)

@@ -1,6 +1,6 @@
 package net.sourceforge.jnhf.tainttracker;
 
-import net.sourceforge.jnhf.disassembler.CAddress;
+import net.sourceforge.jnhf.disassembler.Address;
 import net.sourceforge.jnhf.disassembler.IAddress;
 import net.sourceforge.jnhf.disassembler.Instruction;
 import net.sourceforge.jnhf.disassembler.InstructionDisassembler;
@@ -25,42 +25,42 @@ public class LogfileConverter
 	{
 		if (traceLogLine.getInstruction().startsWith("PHA"))
 		{
-			return new CAddress(0x10000 + Long.valueOf(traceLogLine.getValueS(), 16));
+			return new Address(0x10000 + Long.valueOf(traceLogLine.getValueS(), 16));
 		}
 
 		if (traceLogLine.getInstruction().startsWith("PHP"))
 		{
-			return new CAddress(0x10000 + Long.valueOf(traceLogLine.getValueS(), 16));
+			return new Address(0x10000 + Long.valueOf(traceLogLine.getValueS(), 16));
 		}
 
 		if (traceLogLine.getInstruction().startsWith("PLA"))
 		{
-			return new CAddress(0x10000 + Long.valueOf(traceLogLine.getValueS(), 16));
+			return new Address(0x10000 + Long.valueOf(traceLogLine.getValueS(), 16));
 		}
 
 		if (traceLogLine.getInstruction().startsWith("PLP"))
 		{
-			return new CAddress(0x10000 + Long.valueOf(traceLogLine.getValueS(), 16));
+			return new Address(0x10000 + Long.valueOf(traceLogLine.getValueS(), 16));
 		}
 
 		if (traceLogLine.getInstruction().startsWith("RTS"))
 		{
-			return new CAddress(0x10000 + Long.valueOf(traceLogLine.getValueS(), 16));
+			return new Address(0x10000 + Long.valueOf(traceLogLine.getValueS(), 16));
 		}
 
 		if (traceLogLine.getInstruction().startsWith("RTI"))
 		{
-			return new CAddress(0x10000 + Long.valueOf(traceLogLine.getValueS(), 16));
+			return new Address(0x10000 + Long.valueOf(traceLogLine.getValueS(), 16));
 		}
 
 		if (traceLogLine.getInstruction().startsWith("JSR"))
 		{
-			return new CAddress(0x10000 + Long.valueOf(traceLogLine.getValueS(), 16));
+			return new Address(0x10000 + Long.valueOf(traceLogLine.getValueS(), 16));
 		}
 
 		return traceLogLine.getMemoryAddress() == null ?
 			null :
-			new CAddress(Long.valueOf(traceLogLine.getMemoryAddress(), 16));
+			new Address(Long.valueOf(traceLogLine.getMemoryAddress(), 16));
 	}
 
 	/**

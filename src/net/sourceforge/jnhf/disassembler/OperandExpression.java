@@ -4,19 +4,13 @@ import net.sourceforge.jnhf.helpers.Commafier;
 import net.sourceforge.jnhf.helpers.FilledList;
 import net.sourceforge.jnhf.helpers.IFilledList;
 
-public class OperandExpression
+public final class OperandExpression
 {
 	private final String m_value;
 
 	private OperandExpression m_parent;
 
 	private final IFilledList<OperandExpression> m_children = new FilledList<OperandExpression>();
-
-	private static void link(final OperandExpression parent, final OperandExpression child)
-	{
-		parent.m_children.add(child);
-		child.m_parent = parent;
-	}
 
 	public OperandExpression(final OperandExpression parent, final String value)
 	{
@@ -26,6 +20,12 @@ public class OperandExpression
 		{
 			link(parent, this);
 		}
+	}
+
+	private static void link(final OperandExpression parent, final OperandExpression child)
+	{
+		parent.m_children.add(child);
+		child.m_parent = parent;
 	}
 
 	public FilledList<OperandExpression> getChildren()

@@ -1,10 +1,13 @@
 package net.sourceforge.jnhf.disassembler;
 
-public class CAddress implements IAddress
+/**
+ * Represents a single address.
+ */
+public class Address implements IAddress
 {
 	private final long m_value;
 
-	public CAddress(final long value)
+	public Address(final long value)
 	{
 		m_value = value;
 	}

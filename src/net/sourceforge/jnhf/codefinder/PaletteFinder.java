@@ -1,17 +1,29 @@
 package net.sourceforge.jnhf.codefinder;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import net.sourceforge.jnhf.gui.Palette;
-import net.sourceforge.jnhf.helpers.FileHelpers;
 
+/**
+ * Contains methods for automatically finding palettes in ROM files.
+ */
 public final class PaletteFinder
 {
+	/**
+	 * Looks through a byte array and searches for palettes.
+	 *
+	 * @param data The data to look through.
+	 *
+	 * @return A list of addresses where paletters were found in the given data.
+	 */
 	public static List<Integer> find(final byte[] data)
 	{
+		if (data == null)
+		{
+			throw new IllegalArgumentException("Error: Data argument can not be null");
+		}
+
 		final List<Integer> addresses = new ArrayList<Integer>();
 
 		for (int i=0;i<data.length - Palette.SIZE_IN_BYTES;i++)
@@ -37,15 +49,5 @@ public final class PaletteFinder
 		}
 
 		return addresses;
-	}
-
-	public static void main(final String[] args) throws IOException
-	{
-		final List<Integer> addresses = find(FileHelpers.readFile(new File("F:\\fce\\Faxanadu (U).nes")));
-
-		for (final Integer integer : addresses)
-		{
-			System.out.printf("%04X\n", integer);
-		}
 	}
 }

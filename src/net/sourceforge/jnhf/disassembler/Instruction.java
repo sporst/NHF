@@ -1,6 +1,6 @@
 package net.sourceforge.jnhf.disassembler;
 
-public class Instruction
+public final class Instruction
 {
 	private final String m_mnemonic;
 	private final Operand m_operand;

@@ -3,11 +3,26 @@ package net.sourceforge.jnhf.codefinder;
 import net.sourceforge.jnhf.helpers.FilledList;
 import net.sourceforge.jnhf.helpers.IFilledList;
 
-
-public class FunctionCallFinder
+/**
+ * Contains methods for identifying function calls. This is useful for
+ * automatically identifying code in ROM files.
+ */
+public final class FunctionCallFinder
 {
+	/**
+	 * Identifies potential function calls in a binary array.
+	 *
+	 * @param data The data to look through.
+	 *
+	 * @return A list of identified function calls.
+	 */
 	public static IFilledList<FunctionCall> findFunctionCalls(final byte[] data)
 	{
+		if (data == null)
+		{
+			throw new IllegalArgumentException("Error: Data argument can not be null");
+		}
+
 		final IFilledList<FunctionCall> functionCalls = new FilledList<FunctionCall>();
 
 		for (int i=0;i<data.length - 3;i++)

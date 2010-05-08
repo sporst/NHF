@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.sourceforge.jnhf.disassembler.BasicBlock;
-import net.sourceforge.jnhf.disassembler.CAddress;
+import net.sourceforge.jnhf.disassembler.Address;
 import net.sourceforge.jnhf.disassembler.EdgeType;
 import net.sourceforge.jnhf.disassembler.IAddress;
 import net.sourceforge.jnhf.helpers.Convert;
@@ -88,12 +88,12 @@ public final class BasicBlockGenerator
 
 	private static IAddress toReilAddress(final String addressString)
 	{
-		return ReilHelpers.toReilAddress(new CAddress(Long.valueOf(addressString)));
+		return ReilHelpers.toReilAddress(new Address(Long.valueOf(addressString)));
 	}
 
 	private static IAddress toReilAddress(final String[] parts)
 	{
-		return new CAddress(toReilAddress(parts[0]).toLong() + Long.valueOf(parts[1]));
+		return new Address(toReilAddress(parts[0]).toLong() + Long.valueOf(parts[1]));
 	}
 
 	private void addInstruction(final ReilInstruction reilInstruction, final HashSet<IAddress> jumpTargets, final ReilInstruction lastInstruction)

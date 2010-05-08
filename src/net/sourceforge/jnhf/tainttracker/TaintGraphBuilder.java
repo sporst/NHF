@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.sourceforge.jnhf.disassembler.CAddress;
+import net.sourceforge.jnhf.disassembler.Address;
 import net.sourceforge.jnhf.disassembler.IAddress;
 import net.sourceforge.jnhf.helpers.FilledList;
 import net.sourceforge.jnhf.reil.OperandType;
@@ -50,7 +50,7 @@ public class TaintGraphBuilder
 	{
 		if (address == null && instruction.getFirstOperand().getType() == OperandType.INTEGER_LITERAL)
 		{
-			address = new CAddress(Long.valueOf(instruction.getFirstOperand().getValue(), 16));
+			address = new Address(Long.valueOf(instruction.getFirstOperand().getValue(), 16));
 		}
 
 		if (address == null)
@@ -101,7 +101,7 @@ public class TaintGraphBuilder
 	{
 		if (address == null && instruction.getThirdOperand().getType() == OperandType.INTEGER_LITERAL)
 		{
-			address = new CAddress(Long.valueOf(instruction.getThirdOperand().getValue(), 16));
+			address = new Address(Long.valueOf(instruction.getThirdOperand().getValue(), 16));
 		}
 
 		if (address == null)

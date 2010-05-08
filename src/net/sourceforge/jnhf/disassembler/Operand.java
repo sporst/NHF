@@ -1,6 +1,6 @@
 package net.sourceforge.jnhf.disassembler;
 
-public class Operand
+public final class Operand
 {
 	private final OperandExpression m_root;
 

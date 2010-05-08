@@ -1,6 +1,6 @@
 package net.sourceforge.jnhf.disassembler;
 
-public class InstructionHelpers
+public final class InstructionHelpers
 {
 	public static boolean isBranch(final Instruction instruction)
 	{

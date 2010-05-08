@@ -24,7 +24,7 @@ import net.sourceforge.jnhf.reil.interpreter.Policy6502;
 import net.sourceforge.jnhf.reil.interpreter.ReilInterpreter;
 import net.sourceforge.jnhf.reil.interpreter.ReilRegisterStatus;
 
-public class Disassembler
+public final class Disassembler
 {
 	private static int getFlagValue(final String flagValues, final int i)
 	{

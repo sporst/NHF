@@ -1,6 +1,9 @@
 package net.sourceforge.jnhf.disassembler;
 
-public class InstructionDisassembler
+/**
+ * Disassembler for individual instructions.
+ */
+public final class InstructionDisassembler
 {
 	/**
 	 * This array exists for performance reasons.
@@ -24,8 +27,21 @@ public class InstructionDisassembler
 		"F0", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "FA", "FB", "FC", "FD", "FE", "FF"
 	};
 
+	/**
+	 * Disassembles a single instruction.
+	 *
+	 * @param address The address of the instruction in the data stream.
+	 * @param data The data stream to disassemble.
+	 *
+	 * @return The disassembled instruction.
+	 */
 	public static Instruction disassemble(final int address, final byte[] data)
 	{
+		if (data == null)
+		{
+			throw new IllegalArgumentException("Error: Data argument can not be null");
+		}
+
 		String mnemonic = null;
 		Operand operand = null;
 
@@ -324,6 +340,14 @@ public class InstructionDisassembler
 		return new Instruction(address, mnemonic, operand);
 	}
 
+	/**
+	 * Disassembles a single instruction from a hex string stream.
+	 *
+	 * @param address The address of the instruction.
+	 * @param hex The hexadecimal value stream that represents the instructions.
+	 *
+	 * @return The disassembled instruction.
+	 */
 	public static Instruction disassemble(final int address, final String hex)
 	{
 		final byte[] data = new byte[hex.length() / 2];
